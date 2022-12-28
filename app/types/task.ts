@@ -3,10 +3,9 @@ export enum Status {
   Published = 'Published',
 }
 
-export type PostType = {
+export type TaskType = {
   title: string;
-  status: Status;
-  date: string;
-  url: string;
   description: string;
+  status: Status;
+  priority: 0 | 1 | 2 | 3;
 };

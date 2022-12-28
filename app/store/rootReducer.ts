@@ -1,8 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import postSlice from './reduxes/post';
+import taskSlice from './reduxes/task';
 
 export const rootReducer = combineReducers({
-  post: postSlice,
+  task: taskSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
