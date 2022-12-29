@@ -1,29 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, FlatList} from 'react-native';
 import {Colors} from 'config/theme';
 import TaskItem from './components/taskItem';
-import Form from 'app/screens/todo/components/form';
 import {useSelector, useDispatch} from 'react-redux';
 import {Tasks} from 'store/selectors/task';
 import {TaskType} from 'types/task';
 import {createTask, clearState, deleteById} from 'store/reduxes/task';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {StackParamList} from 'app/screens';
+import Header from 'app/components/header';
 
 const Todo = () => {
-  const [isFormOpen, setOpenForm] = useState<boolean>(false);
-  const [list, setList] = useState<TaskType[]>([]);
+  // const [isFormOpen, setOpenForm] = useState<boolean>(false);
   const task = useSelector(Tasks.info);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackParamList, 'Home'>>();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!isFormOpen) {
-      setList(task.tasks.filter(i => i.isSubmitted));
-    }
-  }, [isFormOpen, task.tasks]);
 
   return (
     <View style={styles.main}>
+      <Header title={'ToDo'} />
       <FlatList
-        data={list}
+        data={task.tasks.filter(i => i.isSubmitted)}
         renderItem={({item}: {item: TaskType}) => (
           <TaskItem
             item={item}
@@ -36,18 +35,14 @@ const Todo = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          setOpenForm(true);
           dispatch(createTask(task.counter));
+          navigation.navigate('Create', {
+            id: task.counter - 1,
+          });
         }}
         style={styles.add}>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>
-      <Form
-        visible={isFormOpen}
-        setVisible={setOpenForm}
-        id={task.counter - 1}
-        task={task.tasks.filter(item => item.id === task.counter - 1)[0]}
-      />
     </View>
   );
 };

@@ -9,7 +9,7 @@ import CreateTask from 'app/screens/createTask';
 
 export type StackParamList = {
   Home: undefined;
-  Create: undefined;
+  Create: {id: number};
   Edit: undefined;
 };
 
@@ -23,7 +23,7 @@ const StackNavigator = createStackNavigator<StackParamList>();
 
 const Stack = () => {
   return (
-    <StackNavigator.Navigator>
+    <StackNavigator.Navigator screenOptions={{headerShown: false}}>
       <StackNavigator.Screen name={'Home'} component={Todo} />
       <StackNavigator.Screen name={'Edit'} component={EditTask} />
       <StackNavigator.Screen name={'Create'} component={CreateTask} />
@@ -36,6 +36,7 @@ const Navigation = () => {
     <NavigationContainer>
       <BottomNavigator.Navigator
         screenOptions={{
+          headerShown: false,
           tabBarLabelPosition: 'beside-icon',
           tabBarLabelStyle: {
             fontWeight: '700',
