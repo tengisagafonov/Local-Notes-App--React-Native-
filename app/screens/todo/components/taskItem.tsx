@@ -2,11 +2,18 @@ import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TaskType} from 'types/task';
 import {Colors, Spacing} from 'config/theme';
-import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {StackParamList} from 'app/screens';
 
-const TaskItem = ({item, onDelete}: {item: TaskType; onDelete: () => void}) => {
-  const navigation = useNavigation();
-
+const TaskItem = ({
+  item,
+  onDelete,
+  navigation,
+}: {
+  item: TaskType;
+  onDelete: () => void;
+  navigation: NativeStackNavigationProp<StackParamList, 'Home'>;
+}) => {
   return (
     <View style={styles.item}>
       <View style={styles.row}>

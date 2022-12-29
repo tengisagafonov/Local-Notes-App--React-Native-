@@ -26,6 +26,7 @@ const Todo = () => {
         renderItem={({item}: {item: TaskType}) => (
           <TaskItem
             item={item}
+            navigation={navigation}
             onDelete={() => dispatch(deleteById(item.id))}
           />
         )}

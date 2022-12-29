@@ -28,7 +28,7 @@ const EditTask = (props: IEditTask) => {
 
   return (
     <View>
-      <Header title={'Create'} goBack />
+      <Header title={'Edit'} goBack />
       <View style={styles.main}>
         <View style={styles.formItem}>
           <Text>Title: </Text>
@@ -67,7 +67,7 @@ const EditTask = (props: IEditTask) => {
             value={{name: task?.priority}}
             data={[{name: 0}, {name: 1}, {name: 2}]}
             onChange={val =>
-              setTask(prev => ({...prev, ...{status: val.name}}))
+              setTask(prev => ({...prev, ...{priority: val.name}}))
             }
             style={styles.input}
           />
@@ -78,7 +78,7 @@ const EditTask = (props: IEditTask) => {
             navigation.goBack();
           }}
           style={styles.submit}>
-          <Text>Submit</Text>
+          <Text>Save</Text>
         </TouchableOpacity>
       </View>
     </View>

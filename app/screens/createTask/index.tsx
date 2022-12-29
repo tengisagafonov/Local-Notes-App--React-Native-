@@ -90,7 +90,7 @@ const CreateTask = () => {
             navigation.goBack();
           }}
           style={styles.submit}>
-          <Text>Submit</Text>
+          <Text>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
