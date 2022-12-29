@@ -22,7 +22,7 @@ interface IDropDownProps {
 }
 
 type DropItemProp = {
-  name: string;
+  name: string | number;
 };
 
 const DropDown: React.FC<IDropDownProps> = ({

@@ -4,9 +4,10 @@ export enum Status {
 }
 
 export type TaskType = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   status: Status;
   priority: 0 | 1 | 2;
+  isSubmitted: boolean;
 };
