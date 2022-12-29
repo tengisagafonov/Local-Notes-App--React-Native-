@@ -14,7 +14,15 @@ const BottomNavigator = createBottomTabNavigator<BottomParamList>();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <BottomNavigator.Navigator>
+      <BottomNavigator.Navigator
+        screenOptions={{
+          tabBarLabelPosition: 'beside-icon',
+          tabBarLabelStyle: {
+            fontWeight: '700',
+            fontSize: 15,
+          },
+          tabBarIconStyle: {display: 'none'},
+        }}>
         <BottomNavigator.Screen name={'Users'} component={Users} />
         <BottomNavigator.Screen name={'ToDo'} component={Todo} />
       </BottomNavigator.Navigator>

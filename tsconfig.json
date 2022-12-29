@@ -2,27 +2,18 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
-    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "jsx": "react",
-    "lib": ["es2015", "es2015.promise", "es2016.array.include", "dom"],
-    "strict": true,
+    "skipLibCheck": true,
     "moduleResolution": "node",
+    /* Skip type checking all .d.ts files. */
+    "baseUrl": ".",
     "paths": {
       "app/*": ["app/*/index", "app/*"],
-      "assets/*" : ["app/assets/*/index" , "app/assets/*"],
-      "components/*" : ["app/components/*/index" , "components/*"],
-      "config/*" : ["app/config/*/index" , "app/config/*"],
-      "screens/*" : ["app/screens/*/index" , "sreens/*"],
-      "store/*" : ["app/store/*/index" , "app/store/*"],
-      "types/*" : ["app/types/*/index" , "app/types/*"],
+      "assets/*" : ["app/assets/*"],
+      "components/*" : ["components/*"],
+      "config/*" : ["app/config/*"],
+      "screens/*" : ["sreens/*"],
+      "store/*" : ["app/store/*"],
+      "types/*" : ["app/types/*"],
     },
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "target": "esnext",
-    "types": ["jest"],
   }
 }
