@@ -29,9 +29,7 @@ const CreateTask = () => {
   const tasks = useSelector(Tasks.info);
   const navigation = useNavigation();
   const id = useMemo(() => tasks.counter - 1, [tasks.counter]);
-
   const task = getTask(id, tasks.tasks);
-
   const dispatch = useDispatch();
 
   return (
@@ -89,7 +87,6 @@ const CreateTask = () => {
           onPress={() => {
             dispatch(addTask(id));
             navigation.goBack();
-            // setTimeout(() => navigation.goBack(), 300);
           }}
           style={styles.submit}>
           <Text>Save</Text>

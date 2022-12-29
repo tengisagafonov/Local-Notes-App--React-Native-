@@ -2,12 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import TaskItem from './components/taskItem';
 import {TaskType} from 'types/task';
-import {
-  clearState,
-  createTask,
-  deleteById,
-  refreshDraft,
-} from 'store/reduxes/task';
+import {createTask, deleteById, refreshDraft} from 'store/reduxes/task';
 import Header from 'app/components/header';
 import Dialog from './components/dialog';
 import {useTodo} from 'app/screens/todo/hooks/useTodo';
