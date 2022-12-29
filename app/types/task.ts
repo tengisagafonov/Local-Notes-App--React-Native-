@@ -28,6 +28,5 @@ export type updatePriorityActionType = {
 };
 
 export type updateTaskType = {
-  id: number;
   task: TaskType;
 };

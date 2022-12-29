@@ -65,7 +65,7 @@ const CreateTask = () => {
             onChange={val =>
               dispatch(
                 updateStatusTaskById({
-                  id: tasks.counter - 1,
+                  id: id,
                   data: val.name as Status,
                 }),
               )

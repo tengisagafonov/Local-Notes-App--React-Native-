@@ -74,7 +74,7 @@ const EditTask = (props: IEditTask) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            dispatch(updateTask({id: task.id, task: task}));
+            dispatch(updateTask({task: task}));
             navigation.goBack();
           }}
           style={styles.submit}>
