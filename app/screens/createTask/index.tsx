@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   Text,
   TextInput,
@@ -15,22 +15,22 @@ import {
   updateTitleTaskById,
 } from 'store/reduxes/task';
 import Dropdown from 'app/components/dropdown';
-import {Status} from 'types/task';
-import {RouteProp, useNavigation} from '@react-navigation/native';
+import {Status, TaskType} from 'types/task';
+import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {StackParamList} from 'app/screens';
 import {Colors, Spacing} from 'config/theme';
 import {Tasks} from 'store/selectors/task';
 
-interface ICreateTask {
-  route: RouteProp<StackParamList, 'Create'>;
-}
+const getTask = (id: number, tasks: TaskType[]) => {
+  return tasks.filter(item => item.id === id)[0];
+};
 
-const CreateTask = (props: ICreateTask) => {
-  const {id} = props.route.params;
+const CreateTask = () => {
   const tasks = useSelector(Tasks.info);
-  const task = tasks.tasks.filter(i => i.id === id)[0];
   const navigation = useNavigation();
+  const id = useMemo(() => tasks.counter - 1, [tasks.counter]);
+
+  const task = getTask(id, tasks.tasks);
   const dispatch = useDispatch();
 
   return (
@@ -63,7 +63,12 @@ const CreateTask = (props: ICreateTask) => {
             value={{name: task?.status}}
             data={Object.values(Status).map(item => ({name: item}))}
             onChange={val =>
-              dispatch(updateStatusTaskById({id: id, data: val.name as Status}))
+              dispatch(
+                updateStatusTaskById({
+                  id: tasks.counter - 1,
+                  data: val.name as Status,
+                }),
+              )
             }
             style={styles.input}
           />

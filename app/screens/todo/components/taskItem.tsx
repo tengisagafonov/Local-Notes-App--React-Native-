@@ -2,8 +2,11 @@ import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TaskType} from 'types/task';
 import {Colors, Spacing} from 'config/theme';
+import {useNavigation} from '@react-navigation/native';
 
 const TaskItem = ({item, onDelete}: {item: TaskType; onDelete: () => void}) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.item}>
       <View style={styles.row}>
@@ -23,7 +26,9 @@ const TaskItem = ({item, onDelete}: {item: TaskType; onDelete: () => void}) => {
         <Text>{item?.priority}</Text>
       </View>
       <View style={styles.row}>
-        <TouchableOpacity style={styles.edit}>
+        <TouchableOpacity
+          style={styles.edit}
+          onPress={() => navigation.navigate('Edit', {task: item})}>
           <Text>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onDelete} style={styles.delete}>

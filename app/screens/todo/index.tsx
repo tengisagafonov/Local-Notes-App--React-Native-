@@ -5,7 +5,7 @@ import TaskItem from './components/taskItem';
 import {useSelector, useDispatch} from 'react-redux';
 import {Tasks} from 'store/selectors/task';
 import {TaskType} from 'types/task';
-import {createTask, clearState, deleteById} from 'store/reduxes/task';
+import {clearState, createTask, deleteById} from 'store/reduxes/task';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 import {StackParamList} from 'app/screens';
@@ -36,9 +36,7 @@ const Todo = () => {
       <TouchableOpacity
         onPress={() => {
           dispatch(createTask(task.counter));
-          navigation.navigate('Create', {
-            id: task.counter - 1,
-          });
+          navigation.navigate('Create');
         }}
         style={styles.add}>
         <Text style={styles.plus}>+</Text>

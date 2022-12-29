@@ -1,5 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Status, TaskType} from 'types/task';
+import {
+  Status,
+  TaskType,
+  updatePriorityActionType,
+  updateStatusActionType,
+  updateTaskActionType,
+  updateTaskType,
+} from 'types/task';
 
 interface TaskStateI {
   tasks: TaskType[];
@@ -22,21 +29,6 @@ const initialState: TaskStateI = {
   hasDrafted: false,
 };
 
-type updateTaskActionType = {
-  id: number;
-  data: string;
-};
-
-type updateStatusActionType = {
-  id: number;
-  data: Status;
-};
-
-type updatePriorityActionType = {
-  id: number;
-  data: 0 | 1 | 2;
-};
-
 const taskSlice = createSlice({
   name: 'task',
   initialState,
@@ -56,6 +48,10 @@ const taskSlice = createSlice({
     addTask: (state, action: PayloadAction<number>) => {
       state.tasks.filter(i => i.id === action.payload)[0].isSubmitted = true;
       state.hasDrafted = false;
+    },
+    updateTask: (state, action: PayloadAction<updateTaskType>) => {
+      state.tasks.filter(i => i.id === action.payload.id)[0] =
+        action.payload.task;
     },
     updateDescriptionTaskById: (
       state,
@@ -100,6 +96,7 @@ export const {
   updatePriorityTaskById,
   updateStatusTaskById,
   updateTitleTaskById,
+  updateTask,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

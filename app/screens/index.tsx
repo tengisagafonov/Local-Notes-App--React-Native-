@@ -6,11 +6,12 @@ import Todo from './todo';
 import Users from './users';
 import EditTask from 'app/screens/editTask';
 import CreateTask from 'app/screens/createTask';
+import {TaskType} from 'types/task';
 
 export type StackParamList = {
   Home: undefined;
-  Create: {id: number};
-  Edit: undefined;
+  Create: undefined;
+  Edit: {task: TaskType};
 };
 
 export type BottomParamList = {

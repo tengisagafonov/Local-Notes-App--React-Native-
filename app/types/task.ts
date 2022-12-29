@@ -11,3 +11,23 @@ export type TaskType = {
   priority: 0 | 1 | 2;
   isSubmitted: boolean;
 };
+
+export type updateTaskActionType = {
+  id: number;
+  data: string;
+};
+
+export type updateStatusActionType = {
+  id: number;
+  data: Status;
+};
+
+export type updatePriorityActionType = {
+  id: number;
+  data: 0 | 1 | 2;
+};
+
+export type updateTaskType = {
+  id: number;
+  task: TaskType;
+};
