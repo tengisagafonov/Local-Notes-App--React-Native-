@@ -1,15 +1,35 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import Todo from './todo';
 import Users from './users';
+import EditTask from 'app/screens/editTask';
+import CreateTask from 'app/screens/createTask';
+
+export type StackParamList = {
+  Home: undefined;
+  Create: undefined;
+  Edit: undefined;
+};
 
 export type BottomParamList = {
   Users: undefined;
-  ToDo: undefined;
+  ToDo: StackParamList;
 };
 
 const BottomNavigator = createBottomTabNavigator<BottomParamList>();
+const StackNavigator = createStackNavigator<StackParamList>();
+
+const Stack = () => {
+  return (
+    <StackNavigator.Navigator>
+      <StackNavigator.Screen name={'Home'} component={Todo} />
+      <StackNavigator.Screen name={'Edit'} component={EditTask} />
+      <StackNavigator.Screen name={'Create'} component={CreateTask} />
+    </StackNavigator.Navigator>
+  );
+};
 
 const Navigation = () => {
   return (
@@ -24,7 +44,7 @@ const Navigation = () => {
           tabBarIconStyle: {display: 'none'},
         }}>
         <BottomNavigator.Screen name={'Users'} component={Users} />
-        <BottomNavigator.Screen name={'ToDo'} component={Todo} />
+        <BottomNavigator.Screen name={'ToDo'} component={Stack} />
       </BottomNavigator.Navigator>
     </NavigationContainer>
   );

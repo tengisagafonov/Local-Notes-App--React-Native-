@@ -26,6 +26,7 @@ type DropItemProp = {
 };
 
 const DropDown: React.FC<IDropDownProps> = ({
+  placeHolder,
   value,
   data = [],
   style,

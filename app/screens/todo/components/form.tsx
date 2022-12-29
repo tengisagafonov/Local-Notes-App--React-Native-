@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   Text,
   TextInput,
@@ -6,21 +6,29 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {Status} from 'types/task';
+import {Status, TaskType} from 'types/task';
 import ModalTest from 'app/components/modal';
 import Dropdown from 'app/components/dropdown';
-import {useDispatch} from 'react-redux';
-import {addTask} from 'store/reduxes/task';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  addTask,
+  updateTitleTaskById,
+  updateDescriptionTaskById,
+  updateStatusTaskById,
+  updatePriorityTaskById,
+} from 'store/reduxes/task';
 import {Colors} from 'config/theme';
 
 const Form = ({
   visible,
   setVisible,
   id,
+  task,
 }: {
   visible?: boolean;
   setVisible: (visible: boolean) => void;
   id: number;
+  task: TaskType;
 }) => {
   const dispatch = useDispatch();
 
@@ -29,25 +37,43 @@ const Form = ({
       <View style={styles.main}>
         <View style={styles.formItem}>
           <Text>Title: </Text>
-          <TextInput style={styles.input} />
+          <TextInput
+            value={task?.title}
+            onChangeText={text =>
+              dispatch(updateTitleTaskById({id: id, data: text}))
+            }
+            style={styles.input}
+          />
         </View>
         <View style={styles.formItem}>
           <Text>Description: </Text>
-          <TextInput style={styles.input} />
+          <TextInput
+            style={styles.input}
+            value={task?.description}
+            onChangeText={text =>
+              dispatch(updateDescriptionTaskById({id: id, data: text}))
+            }
+          />
         </View>
         <View style={styles.formItem}>
           <Text>Status: </Text>
           <Dropdown
-            value={{name: Status.Draft}}
+            value={{name: task?.status}}
             data={Object.values(Status).map(item => ({name: item}))}
+            onChange={val =>
+              dispatch(updateStatusTaskById({id: id, data: val.name as Status}))
+            }
             style={styles.input}
           />
         </View>
         <View style={styles.formItem}>
           <Text>Priority: </Text>
           <Dropdown
-            value={{name: 0}}
+            value={{name: task?.priority}}
             data={[{name: 0}, {name: 1}, {name: 2}]}
+            onChange={val =>
+              dispatch(updatePriorityTaskById({id: id, data: val.name}))
+            }
             style={styles.input}
           />
         </View>

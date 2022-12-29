@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {TaskType} from 'types/task';
 import {Colors, Spacing} from 'config/theme';
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskItem;
+export default memo(TaskItem);

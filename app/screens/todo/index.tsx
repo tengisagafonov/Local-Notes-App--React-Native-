@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, FlatList} from 'react-native';
 import {Colors} from 'config/theme';
 import TaskItem from './components/taskItem';
@@ -10,16 +10,20 @@ import {createTask, clearState, deleteById} from 'store/reduxes/task';
 
 const Todo = () => {
   const [isFormOpen, setOpenForm] = useState<boolean>(false);
-  const tasks = useSelector(Tasks.items);
-  const hasDrafted = useSelector(Tasks.hasDrafted);
+  const [list, setList] = useState<TaskType[]>([]);
+  const task = useSelector(Tasks.info);
   const dispatch = useDispatch();
 
-  console.log(tasks, hasDrafted);
+  useEffect(() => {
+    if (!isFormOpen) {
+      setList(task.tasks.filter(i => i.isSubmitted));
+    }
+  }, [isFormOpen, task.tasks]);
 
   return (
     <View style={styles.main}>
       <FlatList
-        data={tasks.filter(i => i.isSubmitted)}
+        data={list}
         renderItem={({item}: {item: TaskType}) => (
           <TaskItem
             item={item}
@@ -33,12 +37,17 @@ const Todo = () => {
       <TouchableOpacity
         onPress={() => {
           setOpenForm(true);
-          dispatch(createTask(tasks.length));
+          dispatch(createTask(task.counter));
         }}
         style={styles.add}>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>
-      <Form visible={isFormOpen} setVisible={setOpenForm} id={tasks.length} />
+      <Form
+        visible={isFormOpen}
+        setVisible={setOpenForm}
+        id={task.counter - 1}
+        task={task.tasks.filter(item => item.id === task.counter - 1)[0]}
+      />
     </View>
   );
 };
