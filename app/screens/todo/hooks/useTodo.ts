@@ -13,10 +13,10 @@ export const useTodo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!task.hasDrafted || !task.hasChangesInNew) {
-      setVisible(false);
-    } else {
+    if (task.hasDrafted && task.hasChangesInNew) {
       setVisible(true);
+    } else {
+      setVisible(false);
     }
   }, [task.hasDrafted, task.hasChangesInNew]);
 

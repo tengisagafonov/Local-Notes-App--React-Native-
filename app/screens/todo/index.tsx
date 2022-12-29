@@ -9,7 +9,7 @@ import {
   refreshDraft,
 } from 'store/reduxes/task';
 import Header from 'app/components/header';
-import Dialog from './components/diolog';
+import Dialog from './components/dialog';
 import {useTodo} from 'app/screens/todo/hooks/useTodo';
 import {styles} from './styles';
 

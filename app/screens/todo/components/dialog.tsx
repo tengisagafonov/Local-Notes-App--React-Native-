@@ -28,7 +28,9 @@ const Dialog = ({
       title={'Dialog'}>
       <View style={styles.main}>
         <View style={styles.info}>
-          <Text>Has changes in draft , Do you want continue ? </Text>
+          <Text>
+            Желаете ли вы продолжить заполнение задачи или начать с начала?
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -36,7 +38,16 @@ const Dialog = ({
             setVisible(false);
           }}
           style={styles.submit}>
-          <Text>Yes</Text>
+          <Text>Продолжить</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(refreshDraft());
+            navigation.navigate('Create');
+            setVisible(false);
+          }}
+          style={styles.submit}>
+          <Text>Начать заново</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -44,7 +55,7 @@ const Dialog = ({
             setVisible(false);
           }}
           style={styles.submit}>
-          <Text>No</Text>
+          <Text>Закрыть</Text>
         </TouchableOpacity>
       </View>
     </ModalTest>
