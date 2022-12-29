@@ -39,6 +39,7 @@ const taskSlice = createSlice({
       state.tasks = [];
       state.counter = 0;
       state.hasDrafted = false;
+      state.hasChangesInNew = false;
     },
     refreshDraft: state => {
       let index = state.tasks.findIndex(item => item.id === state.counter - 1);

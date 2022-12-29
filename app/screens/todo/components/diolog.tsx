@@ -19,7 +19,13 @@ const Dialog = ({
   const dispatch = useDispatch();
 
   return (
-    <ModalTest setVisible={setVisible} visible={visible} title={'Dialog'}>
+    <ModalTest
+      setVisible={() => {
+        setVisible(false);
+        dispatch(refreshDraft());
+      }}
+      visible={visible}
+      title={'Dialog'}>
       <View style={styles.main}>
         <View style={styles.info}>
           <Text>Has changes in draft , Do you want continue ? </Text>
