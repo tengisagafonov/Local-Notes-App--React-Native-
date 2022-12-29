@@ -54,9 +54,10 @@ const taskSlice = createSlice({
       }
     },
     addTask: (state, action: PayloadAction<number>) => {
+      let index = state.tasks.findIndex(i => i.id === action.payload);
       state.hasDrafted = false;
       state.hasChangesInNew = false;
-      state.tasks.filter(i => i.id === action.payload)[0].isSubmitted = true;
+      state.tasks[index].isSubmitted = true;
     },
     updateTask: (state, action: PayloadAction<updateTaskType>) => {
       let index = state.tasks.findIndex(

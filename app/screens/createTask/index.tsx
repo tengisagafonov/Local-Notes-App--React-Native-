@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {
   Text,
   TextInput,
@@ -31,6 +31,7 @@ const CreateTask = () => {
   const id = useMemo(() => tasks.counter - 1, [tasks.counter]);
 
   const task = getTask(id, tasks.tasks);
+
   const dispatch = useDispatch();
 
   return (
@@ -88,6 +89,7 @@ const CreateTask = () => {
           onPress={() => {
             dispatch(addTask(id));
             navigation.goBack();
+            // setTimeout(() => navigation.goBack(), 300);
           }}
           style={styles.submit}>
           <Text>Save</Text>

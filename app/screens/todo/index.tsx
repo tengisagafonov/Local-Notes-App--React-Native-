@@ -31,12 +31,6 @@ const Todo = () => {
       />
       <TouchableOpacity
         onPress={() => {
-          dispatch(clearState());
-        }}>
-        <Text style={styles.plus}>clear</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
           dispatch(createTask(task.counter));
           dispatch(refreshDraft());
           navigation.navigate('Create');
